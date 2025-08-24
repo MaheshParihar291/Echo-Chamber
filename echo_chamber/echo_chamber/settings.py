@@ -25,7 +25,8 @@ SECRET_KEY = 'django-insecure-dupoftp(nl34)m@pc38ljwkv8h4vev-5l*-1j_3_5e3^bk&u_m
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+import os
+ALLOWED_HOSTS = ['echo-chamber-9ilm.onrender.com']
 
 
 # Application definition
