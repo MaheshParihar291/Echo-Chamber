@@ -8,13 +8,14 @@ def main():
     """Run administrative tasks."""
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'echo_chamber.settings')
 
-    # If running 'runserver' and no port is specified, use PORT from env
+    # If running 'runserver', default to 0.0.0.0 and PORT from env
     if 'runserver' in sys.argv:
-        port_specified = any(arg.isdigit() or ':' in arg for arg in sys.argv[2:])
-        if not port_specified:
-            port = os.environ.get('PORT')
-            if port:
-                sys.argv.append(port)
+        # Check if an address (like '8080' or '0.0.0.0:8080') is provided
+        address_specified = any(':' in arg or arg.isdigit() for arg in sys.argv[2:])
+        
+        if not address_specified:
+            port = os.environ.get('PORT', '8000')
+            sys.argv.append(f'0.0.0.0:{port}')
                 
     try:
         from django.core.management import execute_from_command_line
